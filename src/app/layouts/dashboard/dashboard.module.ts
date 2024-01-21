@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersModule } from './pages/users/users.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -19,7 +20,8 @@ import { UsersModule } from './pages/users/users.module';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    UsersModule
+    UsersModule,
+    SharedModule
   ],
   exports:[DashboardComponent]
 })
