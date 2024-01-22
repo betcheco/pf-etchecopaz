@@ -1,15 +1,24 @@
 <header>
   <h1>Usuarios</h1>
-  <button (click)="showForm()"
+  <button *ngIf="!this.formVisible"
+  (click)="showForm()"
   mat-raised-button color="primary">
     Crear usuario
   </button>
 </header>
 <!-- <app-table [users]="users"></app-table> -->
-<app-user-form (onSubmitEvent)="addUser($event)" [user]="this.user" [showForm]="this.formVisible"></app-user-form>
+<app-user-form 
+(onSubmitEvent)="addUser($event)" 
+(onCancel)="handleOnCancel($event)"
+[user]="this.user" 
+[showForm]="this.formVisible"></app-user-form>
 <hr>
 
-    <table mat-table [dataSource]="users" class="mat-elevation-z8" matSort>
+    <table *ngIf="users.length > 0; else elseBlock"
+    mat-table 
+    [dataSource]="users" 
+    class="mat-elevation-z8" 
+    matSort>
   
       <!-- ID Column -->
       <ng-container matColumnDef="id">
@@ -57,6 +66,10 @@
 
     
     </table>
+
+    <ng-template #elseBlock>
+      No se encontraron usuarios
+    </ng-template>
   
 
   

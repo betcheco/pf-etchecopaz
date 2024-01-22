@@ -2,25 +2,29 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, input
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Role, type User} from '../../models';
 
+
+const initialUser = {
+  id: 0,
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  role: null
+}
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
 })
 export class  UserFormComponent implements OnChanges{
+
   @Input()
   showForm = false;
   userFormGroup: FormGroup;
+  
 
   @Input()
-    user:User = {
-      id: 0,
-      firstName: 'Juan',
-      lastName: '',
-      email: '',
-      password: '',
-      role: null
-    }
+    user:User = initialUser
 
     roleList = [
       Role.ADMIN,
@@ -30,6 +34,8 @@ export class  UserFormComponent implements OnChanges{
 
   @Output()
   onSubmitEvent = new EventEmitter<User>();
+  @Output()
+  onCancel = new EventEmitter<boolean>();
 
   constructor(private formBuilder: FormBuilder) {
     console.log("constructor user-form - ", this.user)
@@ -82,6 +88,12 @@ export class  UserFormComponent implements OnChanges{
     } 
       return ''
     
+  }
+
+  hideForm() {
+    this.userFormGroup.reset()
+    this.user = initialUser
+    this.onCancel.emit(false)
   }
 
 }

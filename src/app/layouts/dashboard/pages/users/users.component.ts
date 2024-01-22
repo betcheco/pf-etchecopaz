@@ -68,7 +68,7 @@ export class UsersComponent{
 
  user:User = {
    id: 0,
-   firstName: 'Prueba',
+   firstName: '',
    lastName: '',
    email: '',
    password: '',
@@ -110,6 +110,10 @@ onEdit(user: User) {
 
 showForm() {
     this.formVisible = true
+}
+
+handleOnCancel(value:boolean){
+  this.formVisible = value
 }
     
 

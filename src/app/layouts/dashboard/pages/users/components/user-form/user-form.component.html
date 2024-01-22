@@ -50,10 +50,17 @@
     }
   </mat-form-field>
   
-  <button
-  type="submit"
-  mat-raised-button color="primary"
-  >Guardar</button>
+  <div class="actions-container">
+    <button
+    type="submit"
+    mat-raised-button color="primary"
+    >Guardar</button>
+  
+    <button
+    (click)="hideForm()"
+    mat-raised-button
+    >Cancelar</button>
+  </div>
   
 </form>
 </section>
