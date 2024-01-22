@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Role, User } from '../../models';
+import { DataSource } from '@angular/cdk/collections';
+import { ReplaySubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +17,7 @@ export class TableComponent implements AfterViewInit{
   users!: User[];
 
   displayedColumns: string[] = ['id', 'name', 'email', 'role'];
-  dataSource: MatTableDataSource<User>;
+  dataSource: MatTableDataSource<User> = new MatTableDataSource(this.users);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -25,12 +27,12 @@ export class TableComponent implements AfterViewInit{
   constructor() {
     // Assign the data to the data source for the table to render
     console.log("table ", this.users)
-    this.dataSource = new MatTableDataSource(this.users);
+    // this.dataSource = new MatTableDataSource(this.users);
   }
 
   ngOnInit(){
     console.log("on init ", this.users)
-    this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.data = this.users;
   }
 
 
@@ -48,4 +50,5 @@ export class TableComponent implements AfterViewInit{
     }
   }
 }
+
 

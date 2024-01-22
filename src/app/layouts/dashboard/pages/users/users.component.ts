@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Role, User } from './models';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { UsersService } from '../../../../core/services/users.service';
 
 
 const MOCK_USERS: User[] = [
@@ -61,39 +59,46 @@ const MOCK_USERS: User[] = [
   styleUrl: './users.component.scss'
 })
 export class UsersComponent{
-  displayedColumns: string[] = ['id', 'name', 'email', 'role'];
+
+  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
  users:User[] = MOCK_USERS;
- dataSource: MatTableDataSource<User>;
+ dataSource = this.users
 
- @ViewChild(MatPaginator)
- paginator!: MatPaginator;
- @ViewChild(MatSort)
- sort!: MatSort;
-
- constructor(){
-  console.log(this.users)
-  this.dataSource = new MatTableDataSource(this.users)
+ user:User = {
+   id: 0,
+   firstName: 'Prueba',
+   lastName: '',
+   email: '',
+   password: '',
+   role: null
  }
 
 
- ngAfterViewInit() {
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
+constructor(private usersService:UsersService){
+  console.log(this.user);
+  // this.initializeUsers();
 }
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
-  }
+async initializeUsers() {
+  const userList = await this.usersService.getUsers();
+  this.users = userList;
 }
+
 
  addUser(newUser: User) {
   console.log("addUser")
   this.users = [...this.users, newUser]
+  console.log(this.users.length)
   // this.users = []
 }
+
+onDelete(id:number){
+  this.users = this.users.filter( (u) => u.id != id )
+}
+
+onEdit(user: User) {
+    this.user = user
+    console.log(this.user)
+  }
 
 }

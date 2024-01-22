@@ -11,8 +11,10 @@ import { SharedModule } from "../../../../shared/shared.module";
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UsersService } from '../../../../core/services/users.service';
+import { UsersMockService } from '../../../../core/services/users-mock.service';
 
 
 
@@ -37,10 +39,14 @@ import {MatButtonModule} from '@angular/material/button';
         SharedModule,
         ReactiveFormsModule,
         MatIcon,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogModule
     ],
     providers: [
-        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'} }
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'} },
+        {
+            provide: UsersService
+        }
     ]
 })
 export class UsersModule { }

@@ -1,9 +1,9 @@
-<p>user-form works!</p>
+
 <form 
 (ngSubmit)="onSubmit()"
 [formGroup]="userFormGroup"
 >
-<div>
+<div class="name-container">
     <mat-form-field>
       <mat-label>Nombre</mat-label>
       <input
@@ -12,7 +12,7 @@
       placeholder="Ex. Juan"
       >
       @if (userFormGroup.get("firstName")?.invalid) {
-        <mat-error>{{getErrorMessage('firstName')}}</mat-error>
+        <mat-error class="mb-4">{{getErrorMessage('firstName')}}</mat-error>
       }
     </mat-form-field>
     <mat-form-field>
@@ -23,11 +23,11 @@
       placeholder="Ex. Perez"
       >
       @if (userFormGroup.get("lastName")?.invalid) {
-        <mat-error>{{getErrorMessage('lastName')}}</mat-error>
+        <mat-error class="mb-4">{{getErrorMessage('lastName')}}</mat-error>
       }
     </mat-form-field>
 </div>
-<mat-form-field>
+<mat-form-field class="email-input">
     <mat-label>Email</mat-label>
     <input 
     formControlName="email" 
@@ -35,10 +35,10 @@
     placeholder="Ex. juanp@email.com"
     type="email">
     @if (userFormGroup.get("email")?.invalid) {
-        <mat-error>{{getErrorMessage('email')}}</mat-error>
+        <mat-error class="mb-4">{{getErrorMessage('email')}}</mat-error>
       }
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="password-input">
     <mat-label>Enter your password</mat-label>
     <input 
     formControlName="password" 
@@ -46,16 +46,13 @@
     [type]="hide ? 'password' : 'text'"
     >
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon class="mb-4">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
 </mat-form-field>
 
 <button
 type="submit"
 mat-raised-button color="primary"
->Enviar</button>
+>Guardar</button>
 
 </form>
-
-
-<pre> {{ userFormGroup.value | json  }}</pre>
