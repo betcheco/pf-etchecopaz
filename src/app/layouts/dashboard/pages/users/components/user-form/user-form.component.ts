@@ -38,7 +38,6 @@ export class  UserFormComponent implements OnChanges{
   onCancel = new EventEmitter<boolean>();
 
   constructor(private formBuilder: FormBuilder) {
-    console.log("constructor user-form - ", this.user)
    this.userFormGroup = this.formBuilder.group({
       firstName: this.formBuilder.control(this.user.firstName, [ Validators.required, Validators.minLength(3) ] ),
       lastName:this.formBuilder.control(this.user.lastName, [ Validators.required,Validators.minLength(3) ]),
@@ -61,9 +60,6 @@ export class  UserFormComponent implements OnChanges{
   }
 
   ngOnChanges( changes: SimpleChanges ){
-
-    console.log(changes)
-
     if (changes['user']) {
       this.userFormGroup.patchValue(changes['user'].currentValue)
     }

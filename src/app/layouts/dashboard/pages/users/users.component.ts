@@ -77,7 +77,6 @@ export class UsersComponent{
 
 
 constructor(private usersService:UsersService){
-  console.log(this.user);
   // this.initializeUsers();
 }
 
