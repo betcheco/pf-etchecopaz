@@ -47,7 +47,7 @@ export class  UserFormComponent implements OnChanges{
       this.userFormGroup.markAllAsTouched()
       return
     } else {
-      this.onSubmitEvent.emit({ ...this.userFormGroup.value, id:0 , password: (Math.random() + 1).toString(36)} )
+      this.onSubmitEvent.emit({ ...this.userFormGroup.value, id:this.user.id , password: this.user.id === 0 ? (Math.random() + 1).toString(36) : this.user.password} )
       this.userFormGroup.reset()
       this.userFormGroup.markAsUntouched()
     }
