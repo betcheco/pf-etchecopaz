@@ -88,7 +88,12 @@ async initializeUsers() {
 
 
  addUser(newUser: User) {
-  this.users = [...this.users, {...newUser, id: this.lastId+1}]
+  if ( newUser.id === 0 ){
+    this.lastId++;
+    this.users = [...this.users, {...newUser, id: this.lastId}]
+  } else {
+    this.users = this.users.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
+  }
   console.log(newUser)
   this.formVisible = false
 }
@@ -99,8 +104,7 @@ onDelete(id:number){
 
 onEdit(user: User) {
     this.user = user
-    this.formVisible = false
-    console.log(this.user)
+    this.showForm()
   }
 
 
