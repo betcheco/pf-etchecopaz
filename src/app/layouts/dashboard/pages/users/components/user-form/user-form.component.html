@@ -1,9 +1,9 @@
-
-<form 
-(ngSubmit)="onSubmit()"
-[formGroup]="userFormGroup"
->
-<div class="name-container">
+<section *ngIf="showForm">
+  <form 
+  (ngSubmit)="onSubmit()"
+  [formGroup]="userFormGroup"
+  >
+  <div class="name-container">
     <mat-form-field>
       <mat-label>Nombre</mat-label>
       <input
@@ -26,8 +26,8 @@
         <mat-error class="mb-4">{{getErrorMessage('lastName')}}</mat-error>
       }
     </mat-form-field>
-</div>
-<mat-form-field class="email-input">
+  </div>
+  <mat-form-field class="email-input">
     <mat-label>Email</mat-label>
     <input 
     formControlName="email" 
@@ -35,24 +35,25 @@
     placeholder="Ex. juanp@email.com"
     type="email">
     @if (userFormGroup.get("email")?.invalid) {
-        <mat-error class="mb-4">{{getErrorMessage('email')}}</mat-error>
-      }
+      <mat-error class="mb-4">{{getErrorMessage('email')}}</mat-error>
+    }
   </mat-form-field>
-  <mat-form-field class="password-input">
-    <mat-label>Enter your password</mat-label>
-    <input 
-    formControlName="password" 
-    matInput 
-    [type]="hide ? 'password' : 'text'"
-    >
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon class="mb-4">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-</mat-form-field>
-
-<button
-type="submit"
-mat-raised-button color="primary"
->Guardar</button>
-
+  <mat-form-field class="role-input">
+    <mat-label>Seleccionar Rol</mat-label>
+    <mat-select formControlName="role">
+      @for (role of roleList; track role) {
+        <mat-option [value]="role">{{ role }}</mat-option>
+      }
+    </mat-select>
+    @if (userFormGroup.get("role")?.invalid) {
+      <mat-error class="mb-4">{{getErrorMessage('role')}}</mat-error>
+    }
+  </mat-form-field>
+  
+  <button
+  type="submit"
+  mat-raised-button color="primary"
+  >Guardar</button>
+  
 </form>
+</section>

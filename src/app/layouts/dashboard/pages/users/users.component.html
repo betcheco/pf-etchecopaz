@@ -1,6 +1,12 @@
-<h1>Usuarios</h1>
+<header>
+  <h1>Usuarios</h1>
+  <button (click)="showForm()"
+  mat-raised-button color="primary">
+    Crear usuario
+  </button>
+</header>
 <!-- <app-table [users]="users"></app-table> -->
-<app-user-form (onSubmitEvent)="addUser($event)" [user]="this.user"></app-user-form>
+<app-user-form (onSubmitEvent)="addUser($event)" [user]="this.user" [showForm]="this.formVisible"></app-user-form>
 <hr>
 
     <table mat-table [dataSource]="users" class="mat-elevation-z8" matSort>

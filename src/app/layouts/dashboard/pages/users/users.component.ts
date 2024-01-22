@@ -10,7 +10,7 @@ const MOCK_USERS: User[] = [
     lastName: 'Uzumaki',
     email: "narutito@gmail.com",
     password : "",
-    role: Role.ALUMN
+    role: Role.STUDENT
 } ,
 {
   id:2,
@@ -18,7 +18,7 @@ const MOCK_USERS: User[] = [
   lastName: 'Uchiha',
   email: "sask@gmail.com",
   password : "",
-  role: Role.ALUMN
+  role: Role.STUDENT
 },
 {
   id:3,
@@ -26,7 +26,7 @@ const MOCK_USERS: User[] = [
   lastName: 'Haruno',
   email: "saku@gmail.com",
   password : "",
-  role: Role.ALUMN
+  role: Role.STUDENT
 },
 {
   id:4,
@@ -60,9 +60,11 @@ const MOCK_USERS: User[] = [
 })
 export class UsersComponent{
 
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
+ displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
+ formVisible = false;
  users:User[] = MOCK_USERS;
  dataSource = this.users
+ lastId = this.users.length;
 
  user:User = {
    id: 0,
@@ -86,10 +88,9 @@ async initializeUsers() {
 
 
  addUser(newUser: User) {
-  console.log("addUser")
-  this.users = [...this.users, newUser]
-  console.log(this.users.length)
-  // this.users = []
+  this.users = [...this.users, {...newUser, id: this.lastId+1}]
+  console.log(newUser)
+  this.formVisible = false
 }
 
 onDelete(id:number){
@@ -98,7 +99,14 @@ onDelete(id:number){
 
 onEdit(user: User) {
     this.user = user
+    this.formVisible = false
     console.log(this.user)
   }
+
+
+showForm() {
+    this.formVisible = true
+}
+    
 
 }

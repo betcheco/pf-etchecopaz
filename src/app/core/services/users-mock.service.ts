@@ -12,7 +12,7 @@ export class UsersMockService {
               lastName: 'Uzumaki',
               email: "narutito@gmail.com",
               password : "",
-              role: Role.ALUMN
+              role: Role.STUDENT
           } ,
           {
             id:2,
@@ -20,7 +20,7 @@ export class UsersMockService {
             lastName: 'Uchiha',
             email: "sask@gmail.com",
             password : "",
-            role: Role.ALUMN
+            role: Role.STUDENT
           },
           {
             id:3,
@@ -28,7 +28,7 @@ export class UsersMockService {
             lastName: 'Haruno',
             email: "saku@gmail.com",
             password : "",
-            role: Role.ALUMN
+            role: Role.STUDENT
           },
           {
             id:4,

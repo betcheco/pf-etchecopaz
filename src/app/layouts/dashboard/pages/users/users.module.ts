@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UsersService } from '../../../../core/services/users.service';
 import { UsersMockService } from '../../../../core/services/users-mock.service';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 
@@ -40,7 +42,8 @@ import { UsersMockService } from '../../../../core/services/users-mock.service';
         ReactiveFormsModule,
         MatIcon,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSelectModule
     ],
     providers: [
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'} },

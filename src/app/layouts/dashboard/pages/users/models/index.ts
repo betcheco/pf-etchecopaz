@@ -10,6 +10,6 @@ export interface User{
 
 export enum Role{
     ADMIN = "ADMIN",
-    ALUMN = "ALUMN",
+    STUDENT = "STUDENT",
     TEACHER = "TEACHER"
 }
