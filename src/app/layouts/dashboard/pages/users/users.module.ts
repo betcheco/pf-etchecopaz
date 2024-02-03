@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UsersService } from '../../../../core/services/users.service';
 import { UsersMockService } from '../../../../core/services/users-mock.service';
 import { MatSelectModule } from '@angular/material/select';
+import { DetailsComponent } from './components/details/details.component';
 
 
 
@@ -24,7 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
     declarations: [
         UsersComponent,
         TableComponent,
-        UserFormComponent
+        UserFormComponent,
+        DetailsComponent
     ],
     exports: [UsersComponent,
         TableComponent,

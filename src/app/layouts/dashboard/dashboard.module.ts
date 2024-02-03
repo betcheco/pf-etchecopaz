@@ -14,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { UsersComponent } from './pages/users/users.component';
 import { MatListModule } from '@angular/material/list';
+import { DetailsComponent } from './pages/users/components/details/details.component';
 
 
 
@@ -37,7 +38,11 @@ import { MatListModule } from '@angular/material/list';
       },
       {
         path:'users',
-        component:UsersComponent
+        component:UsersComponent,
+      },
+      {
+        path:'users/:id',
+        component:DetailsComponent
       },
       {
         path:'students',
