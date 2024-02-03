@@ -78,16 +78,11 @@ export class UsersComponent implements OnInit{
 
 
 constructor(private usersService:UsersService){
-  // this.initializeUsers();
 }
   ngOnInit(): void {
     this.getUsers()
   }
 
-// async initializeUsers() {
-//   const userList = await this.usersService.getUsers();
-//   this.users = userList;
-// }
 
 getUsers(){
   this.usersService.getUsers().subscribe(({

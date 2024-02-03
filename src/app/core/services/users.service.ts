@@ -74,7 +74,7 @@ export class UsersService {
   }
 
   getUserById(id:number){
-
+    return of(MOCK_USERS.find((u) => u.id === id)).pipe(delay(1000))
   }
 
   updateUser(newUser:User){
