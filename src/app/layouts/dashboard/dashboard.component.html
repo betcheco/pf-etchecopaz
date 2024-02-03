@@ -8,17 +8,45 @@
     
     <mat-drawer #drawer class="sidenav" mode="side">
       <p>Menu</p>
-      @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-      }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
-      </button>
+     <mat-nav-list>
+      <a
+        #homeLink="routerLinkActive" 
+        routerLinkActive
+        [activated]="homeLink.isActive"
+        routerLink="home" 
+        mat-list-item>
+        Home
+      </a>
+      <a
+        #usersLink="routerLinkActive"
+        routerLinkActive 
+        [activated]="usersLink.isActive"
+        routerLink="users" 
+        mat-list-item>
+        Usuarios
+      </a>
+      <a
+        #coursesLink="routerLinkActive" 
+        routerLinkActive
+        [activated]="coursesLink.isActive" 
+        routerLink="courses" mat-list-item>
+        Cursos
+      </a>
+      <a
+        #classesLink="routerLinkActive" 
+        routerLinkActive
+        [activated]="classesLink.isActive" 
+        routerLink="classes" 
+        mat-list-item>
+        Clases
+      </a>
+     </mat-nav-list>
     </mat-drawer>
 
     <div class="content">
        
-        <app-users></app-users>
+      <router-outlet></router-outlet>
+
     </div>
   
   </mat-drawer-container>
