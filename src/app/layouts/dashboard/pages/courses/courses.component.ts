@@ -7,6 +7,12 @@ import { Course } from './models';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent {
+onDelete(arg0: any) {
+throw new Error('Method not implemented.');
+}
+onEdit(_t36: any) {
+throw new Error('Method not implemented.');
+}
 
   courses: Course[] = [
     {
@@ -27,8 +33,6 @@ export class CoursesComponent {
   ];
   
 displayedColumns = ['id', 'name', 'actions'];
-
-
 
 
 }

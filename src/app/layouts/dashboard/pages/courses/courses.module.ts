@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CoursesComponent } from './courses.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconButton } from '@angular/material/button';
+
 
 
 
@@ -15,7 +17,8 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     CommonModule,
     MatIcon,
-    MatTableModule
+    MatTableModule,
+    MatIconButton
   ]
 })
 export class CoursesModule { }

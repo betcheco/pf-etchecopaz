@@ -15,6 +15,8 @@ import { StudentsComponent } from './pages/students/students.component';
 import { UsersComponent } from './pages/users/users.component';
 import { MatListModule } from '@angular/material/list';
 import { DetailsComponent } from './pages/users/components/details/details.component';
+import { ClassesModule } from './pages/classes/classes.module';
+import { CoursesModule } from './pages/courses/courses.module';
 
 
 
@@ -30,6 +32,8 @@ import { DetailsComponent } from './pages/users/components/details/details.compo
     MatIconModule,
     MatListModule,
     UsersModule,
+    ClassesModule,
+    CoursesModule,
     SharedModule,
     RouterModule.forChild([
       {

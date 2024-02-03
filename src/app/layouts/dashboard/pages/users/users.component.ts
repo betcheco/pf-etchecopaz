@@ -102,16 +102,27 @@ getUsers(){
  addUser(newUser: User) {
   if ( newUser.id === 0 ){
     this.lastId++;
-    this.users = [...this.users, {...newUser, id: this.lastId}]
+    this.usersService.addUser({...newUser, id: this.lastId}).subscribe({
+      next: (newUsers) => {
+        this.users = [...newUsers]
+      },
+    })
   } else {
-    this.users = this.users.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
+    this.usersService.updateUser(newUser).subscribe({
+      next: (newUsers) => {
+        this.users = [...newUsers]
+      }
+    })
   }
-  console.log(newUser)
   this.formVisible = false
 }
 
 onDelete(id:number){
-  this.users = this.users.filter( (u) => u.id != id )
+  this.usersService.deleteUser(id).subscribe({
+    next:(newUsers) => {
+      this.users = newUsers
+    }
+  })
 }
 
 onEdit(user: User) {

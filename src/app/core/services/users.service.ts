@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Role, User } from '../../layouts/dashboard/pages/users/models';
 import { delay, of } from 'rxjs';
 
-const MOCK_USERS = [
+let MOCK_USERS: User[] = [
   {
     id:1,
     firstName: 'Naruto',
@@ -61,5 +61,24 @@ export class UsersService {
 
   getUsers() {
     return of(MOCK_USERS).pipe(delay(1000))
-}
+  }
+
+  addUser(newUser: User) {
+    MOCK_USERS.push(newUser)
+    return this.getUsers()
+  }
+
+  deleteUser(id:number){
+    MOCK_USERS = MOCK_USERS.filter( (u) => u.id != id )
+    return this.getUsers()
+  }
+
+  getUserById(id:number){
+
+  }
+
+  updateUser(newUser:User){
+    MOCK_USERS = MOCK_USERS.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
+    return this.getUsers()
+  }
 }
