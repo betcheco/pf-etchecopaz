@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Role, User } from './models';
 import { UsersService } from '../../../../core/services/users.service';
 
@@ -58,11 +58,12 @@ const MOCK_USERS: User[] = [
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent{
+export class UsersComponent implements OnInit{
 
  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
  formVisible = false;
- users:User[] = MOCK_USERS;
+//  users:User[] = MOCK_USERS;
+ users:User[] = [];
  dataSource = this.users
  lastId = this.users.length;
 
@@ -79,10 +80,22 @@ export class UsersComponent{
 constructor(private usersService:UsersService){
   // this.initializeUsers();
 }
+  ngOnInit(): void {
+    this.getUsers()
+  }
 
-async initializeUsers() {
-  const userList = await this.usersService.getUsers();
-  this.users = userList;
+// async initializeUsers() {
+//   const userList = await this.usersService.getUsers();
+//   this.users = userList;
+// }
+
+getUsers(){
+  this.usersService.getUsers().subscribe(({
+    next: (_users) => {
+      this.users = _users
+      this.lastId = this.users.length;
+    }
+  }))
 }
 
 

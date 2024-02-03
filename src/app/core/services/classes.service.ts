@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Classes } from '../../layouts/dashboard/pages/classes/models';
+import { Class } from '../../layouts/dashboard/pages/classes/models';
+import {  debounceTime, of } from 'rxjs';
 
-const MOCK_CLASSES = [
+const MOCK_CLASSES:Class[] = [
   {
     id:1,
     teacher: 4,
-    students: [1]
+    students: []
   },
   {
     id:2,
@@ -18,6 +19,10 @@ const MOCK_CLASSES = [
   providedIn: 'root'
 })
 export class ClassesService {
-
   constructor() { }
+
+  getClasses(){
+    return of(MOCK_CLASSES).pipe(debounceTime(1000));
+  }
+
 }

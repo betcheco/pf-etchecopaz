@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Role, User } from '../../layouts/dashboard/pages/users/models';
+import { delay, of } from 'rxjs';
 
 const MOCK_USERS = [
   {
@@ -58,7 +59,7 @@ export class UsersService {
 
   constructor() { }
 
-  async getUsers(): Promise<User[]> {
-    return MOCK_USERS
+  getUsers() {
+    return of(MOCK_USERS).pipe(delay(1000))
 }
 }
