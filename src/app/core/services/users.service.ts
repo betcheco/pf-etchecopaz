@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Role, User } from '../../layouts/dashboard/pages/users/models';
-import { delay, of } from 'rxjs';
+import { delay, of, tap } from 'rxjs';
+import { AlertsService } from './alerts.service';
 
 let MOCK_USERS: User[] = [
   {
@@ -57,7 +58,7 @@ let MOCK_USERS: User[] = [
 })
 export class UsersService {
 
-  constructor() { }
+  constructor(private alerts: AlertsService) { }
 
   getUsers() {
     return of(MOCK_USERS).pipe(delay(1000))
@@ -65,12 +66,20 @@ export class UsersService {
 
   addUser(newUser: User) {
     MOCK_USERS.push(newUser)
-    return this.getUsers()
+    return this.getUsers().pipe(
+      tap(() =>
+        this.alerts.showSuccess('Realizado', 'Se agrego el usuario correctamente')
+      )
+    );
   }
 
   deleteUser(id:number){
     MOCK_USERS = MOCK_USERS.filter( (u) => u.id != id )
-    return this.getUsers()
+    return this.getUsers().pipe(
+      tap(() =>
+        this.alerts.showSuccess('Realizado', 'Se elimino el usuario correctamente')
+      )
+    );
   }
 
   getUserById(id:number){
@@ -79,6 +88,10 @@ export class UsersService {
 
   updateUser(newUser:User){
     MOCK_USERS = MOCK_USERS.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
-    return this.getUsers()
+    return this.getUsers().pipe(
+      tap(() =>
+        this.alerts.showSuccess('Realizado', 'Se actualizo el usuario correctamente')
+      )
+    );
   }
 }
