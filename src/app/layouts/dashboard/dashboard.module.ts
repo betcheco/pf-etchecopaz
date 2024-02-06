@@ -7,6 +7,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersModule } from './pages/users/users.module';
 import { SharedModule } from '../../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ClassesComponent } from './pages/classes/classes.component';
+import { CoursesComponent } from './pages/courses/courses.component';
+import { HomeComponent } from './pages/home/home.component';
+import { StudentsComponent } from './pages/students/students.component';
+import { UsersComponent } from './pages/users/users.component';
+import { MatListModule } from '@angular/material/list';
+import { DetailsComponent } from './pages/users/components/details/details.component';
+import { ClassesModule } from './pages/classes/classes.module';
+import { CoursesModule } from './pages/courses/courses.module';
 
 
 
@@ -20,8 +30,37 @@ import { SharedModule } from '../../shared/shared.module';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatListModule,
     UsersModule,
-    SharedModule
+    ClassesModule,
+    CoursesModule,
+    SharedModule,
+    RouterModule.forChild([
+      {
+        path:'home',
+        component:HomeComponent
+      },
+      {
+        path:'users',
+        component:UsersComponent,
+      },
+      {
+        path:'users/:id',
+        component:DetailsComponent
+      },
+      {
+        path:'students',
+        component:StudentsComponent
+      },
+      {
+        path:'classes',
+        component:ClassesComponent
+      },
+      {
+        path:'courses',
+        component:CoursesComponent
+      },
+    ])
   ],
   exports:[DashboardComponent]
 })

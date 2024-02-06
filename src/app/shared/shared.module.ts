@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FullNamePipe } from './full-name.pipe';
-import { Font20Directive } from './font-20.directive';
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { Font20Directive } from './directives/font-20.directive';
 
 
 

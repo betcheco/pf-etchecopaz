@@ -1,0 +1,54 @@
+<header>
+    <h1>Cursos</h1>
+</header>
+
+<hr>
+
+<table 
+  *ngIf="courses.length > 0; else elseBlock"
+  mat-table [dataSource]="courses" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="classes">
+      <th mat-header-cell *matHeaderCellDef> Nro de comisiones </th>
+      <td mat-cell *matCellDef="let element"> {{element.classes.length}} </td>
+    </ng-container>
+  
+
+    <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header appFont20>  </th>
+    <td mat-cell *matCellDef="let row">
+      <button (click)="onEdit(row)"
+      mat-icon-button matTooltip="Editar" aria-label="Icon button with a edit icon">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="onDelete(row.id)"
+      mat-icon-button color="warn" matTooltip="Eliminar" aria-label="Icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+      </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #elseBlock>
+  No se encontraron cursos
+</ng-template>

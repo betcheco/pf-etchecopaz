@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Role, User } from './models';
 import { UsersService } from '../../../../core/services/users.service';
 
@@ -58,11 +58,12 @@ const MOCK_USERS: User[] = [
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent{
+export class UsersComponent implements OnInit{
 
  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
  formVisible = false;
- users:User[] = MOCK_USERS;
+//  users:User[] = MOCK_USERS;
+ users:User[] = [];
  dataSource = this.users
  lastId = this.users.length;
 
@@ -77,28 +78,46 @@ export class UsersComponent{
 
 
 constructor(private usersService:UsersService){
-  // this.initializeUsers();
 }
+  ngOnInit(): void {
+    this.getUsers()
+  }
 
-async initializeUsers() {
-  const userList = await this.usersService.getUsers();
-  this.users = userList;
+
+getUsers(){
+  this.usersService.getUsers().subscribe(({
+    next: (_users) => {
+      this.users = _users
+      this.lastId = this.users.length;
+    }
+  }))
 }
 
 
  addUser(newUser: User) {
   if ( newUser.id === 0 ){
     this.lastId++;
-    this.users = [...this.users, {...newUser, id: this.lastId}]
+    this.usersService.addUser({...newUser, id: this.lastId}).subscribe({
+      next: (newUsers) => {
+        this.users = [...newUsers]
+      },
+    })
   } else {
-    this.users = this.users.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
+    this.usersService.updateUser(newUser).subscribe({
+      next: (newUsers) => {
+        this.users = [...newUsers]
+      }
+    })
   }
-  console.log(newUser)
   this.formVisible = false
 }
 
 onDelete(id:number){
-  this.users = this.users.filter( (u) => u.id != id )
+  this.usersService.deleteUser(id).subscribe({
+    next:(newUsers) => {
+      this.users = newUsers
+    }
+  })
 }
 
 onEdit(user: User) {
