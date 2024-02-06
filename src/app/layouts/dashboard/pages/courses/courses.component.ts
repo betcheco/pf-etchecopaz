@@ -32,7 +32,7 @@ throw new Error('Method not implemented.');
     }
   ];
   
-displayedColumns = ['id', 'name', 'actions'];
+displayedColumns = ['id', 'name', 'classes', 'actions'];
 
 
 }

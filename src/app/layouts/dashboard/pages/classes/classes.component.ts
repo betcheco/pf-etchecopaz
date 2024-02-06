@@ -9,20 +9,38 @@ import { ClassesService } from '../../../../core/services/classes.service';
   styleUrl: './classes.component.scss'
 })
 export class ClassesComponent implements OnInit {
-  classes: Class[]
-  displayedColumns: string[] = ['id','teacher'];
-  dataSource:Class[] = [];
 
-  constructor(private classService: ClassesService) {
-    this.classes = []
-  }
+  classes: Class[] = []
+  displayedColumns: string[] = ['id','teacher', "students", "actions"];
+
+  constructor(private classService: ClassesService) {}
+
   ngOnInit(): void {
+    this.getClasses()
+  }
+
+  getClasses(){
     this.classService.getClasses().subscribe({
       next: (classes) => {
-        console.log(classes)
-        this.dataSource = classes
+        this.classes = classes
       }
     })
   }
 
+  onDelete(id: number) {
+  this.classService.deleteClass(id).subscribe({
+    next:(newClasses) => {
+      this.classes = newClasses
+    }})
+  }
+
+  onEdit(pClass: Class) {
+  this.classService.updateClass(pClass).subscribe({
+    next:(newClasses) => {
+      this.classes = newClasses
+    }})
+  }
+  
+
+  
 }

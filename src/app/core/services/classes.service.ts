@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Class } from '../../layouts/dashboard/pages/classes/models';
-import {  debounceTime, of, tap } from 'rxjs';
+import {  debounceTime, delay, of, tap } from 'rxjs';
 import { AlertsService } from './alerts.service';
 
 let MOCK_CLASSES:Class[] = [
@@ -23,7 +23,7 @@ export class ClassesService {
   constructor(private alerts: AlertsService) { }
 
   getClasses(){
-    return of(MOCK_CLASSES).pipe(debounceTime(1000));
+    return of(MOCK_CLASSES)
   }
 
   addClass(newClass:Class){
