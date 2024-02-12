@@ -5,6 +5,9 @@ import { Font20Directive } from './directives/font-20.directive';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -18,7 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   exports: [
     FullNamePipe,

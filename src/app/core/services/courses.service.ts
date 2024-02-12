@@ -32,6 +32,10 @@ export class CoursesService {
     return of(MOCK_COURSES).pipe(delay(1000))
   }
 
+  getCourseById(id: number) {
+    return of(MOCK_COURSES.filter((c) => c.id == id)).pipe(delay(1000));
+  }
+
   addCourse(newCourse:Course){
     MOCK_COURSES.push(newCourse);
     return this.getCourses().pipe(

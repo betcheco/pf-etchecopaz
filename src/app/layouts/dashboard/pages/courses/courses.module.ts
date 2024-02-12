@@ -6,6 +6,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconButton } from '@angular/material/button';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
     MatIcon,
     MatTableModule,
     MatIconButton,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule
+
   ],
 
 })

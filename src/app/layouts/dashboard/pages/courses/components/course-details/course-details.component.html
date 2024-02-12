@@ -1,2 +1,49 @@
+<app-page-header title="Detalle del curso" buttonText="" linkPath=""></app-page-header>
+
+<section>
+    <form>
+        Nombre del curso:
+        {{ course.name }}
+    </form>
+    Clases:
+    <ul>
+        <li *ngFor="let class of classes">
+            {{ class.id }}
+        </li>
+    </ul>
 <p>course-details works!</p>
-{{ courseId}}
+{{ courseId }}
+
+    <form 
+    (ngSubmit)="onSubmit()"
+    [formGroup]="courseFormGroup"
+    >
+    <div class="name-container"> 
+      <mat-form-field>
+        <mat-label>Nombre del curso</mat-label>
+        <input
+        formControlName="courseName"  
+        matInput 
+        placeholder="Ex. React"
+        >
+        @if (courseFormGroup.get("courseName")?.invalid) {
+          <mat-error class="mb-4">Error </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    
+    <div class="actions-container">
+      <button
+      type="submit"
+      mat-raised-button color="primary"
+      >Guardar</button>
+    
+      <button
+      (click)="onCancel()"
+      mat-raised-button
+      >Cancelar</button>
+    </div>
+    
+  </form>
+  </section>
+  
