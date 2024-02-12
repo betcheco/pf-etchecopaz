@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { DetailsComponent } from './pages/users/components/details/details.component';
 import { ClassesModule } from './pages/classes/classes.module';
 import { CoursesModule } from './pages/courses/courses.module';
+import { CourseDetailsComponent } from './pages/courses/components/course-details/course-details.component';
+import { ClassDetailsComponent } from './pages/classes/components/class-details/class-details.component';
 
 
 
@@ -57,8 +59,16 @@ import { CoursesModule } from './pages/courses/courses.module';
         component:ClassesComponent
       },
       {
+        path:'classes/:id',
+        component: ClassDetailsComponent
+      },
+      {
         path:'courses',
         component:CoursesComponent
+      },
+      {
+        path:'courses/:id',
+        component:CourseDetailsComponent
       },
     ])
   ],
