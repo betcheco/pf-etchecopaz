@@ -9,6 +9,8 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+
 
 
 
@@ -25,7 +27,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     SharedModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInput
 
   ],
 

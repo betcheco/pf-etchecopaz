@@ -6,6 +6,10 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ClassDetailsComponent } from './components/class-details/class-details.component';
 import { SharedModule } from '../../../../shared/shared.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+
+
 
 
 
@@ -20,7 +24,9 @@ import { SharedModule } from '../../../../shared/shared.module';
     MatTableModule,
     MatIconButton,
     MatIcon,
-    SharedModule
+    SharedModule,
+    MatFormFieldModule,
+    MatInput
   ]
 })
 export class ClassesModule { }

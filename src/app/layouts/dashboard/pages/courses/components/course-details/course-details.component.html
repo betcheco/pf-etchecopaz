@@ -31,6 +31,15 @@
         }
       </mat-form-field>
     </div>
+
+    <mat-form-field>
+      <mat-label>Clases</mat-label>
+      <mat-select formControlName="courseClasses" multiple>
+        @for (class of course.classes; track class) {
+          <mat-option [value]="class">{{class.id}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
     
     <div class="actions-container">
       <button
