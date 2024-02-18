@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Role, User } from '../../layouts/dashboard/pages/users/models';
-import { delay, of, tap } from 'rxjs';
+import { catchError, delay, mergeMap, of, tap } from 'rxjs';
 import { AlertsService } from './alerts.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 let MOCK_USERS: User[] = [
   {
@@ -58,40 +60,40 @@ let MOCK_USERS: User[] = [
 })
 export class UsersService {
 
-  constructor(private alerts: AlertsService) { }
+  constructor(private alerts: AlertsService, private httpClient: HttpClient) { }
 
   getUsers() {
-    return of(MOCK_USERS).pipe(delay(1000))
+    return this.httpClient.get<User[]>(environment.apiUrl + '/users').pipe(
+      catchError((error) => {
+          this.alerts.showError('Error');
+          return of([]);
+      })
+    );
   }
 
-  addUser(newUser: User) {
-    MOCK_USERS.push(newUser)
-    return this.getUsers().pipe(
-      tap(() =>
-        this.alerts.showSuccess('Realizado', 'Se agrego el usuario correctamente')
-      )
+  addUser(newUser: unknown) {
+    return this.httpClient.post<User>(environment.apiUrl +'/users', newUser).pipe(
+      mergeMap(() => this.getUsers()),
+      tap(() => this.alerts.showSuccess('Realizado', 'Usuario creado exitosamente'))
     );
   }
 
   deleteUser(id:number){
-    MOCK_USERS = MOCK_USERS.filter( (u) => u.id != id )
-    return this.getUsers().pipe(
-      tap(() =>
-        this.alerts.showSuccess('Realizado', 'Se elimino el usuario correctamente')
-      )
-    );
+    return this.httpClient.delete<User>(environment.apiUrl + '/users/'+id).pipe(
+      mergeMap(() => this.getUsers()),
+      tap(() => this.alerts.showSuccess('Realizado', 'Se elimino el usuario correctamente'))
+    )
+
   }
 
   getUserById(id:number){
-    return of(MOCK_USERS.find((u) => u.id === id)).pipe(delay(1000))
+    return this.httpClient.get<User>(environment.apiUrl + '/users/'+ id);
   }
 
   updateUser(newUser:User){
-    MOCK_USERS = MOCK_USERS.map( (u) => u.id === newUser.id ? { ...u, ...newUser } : u )
-    return this.getUsers().pipe(
-      tap(() =>
-        this.alerts.showSuccess('Realizado', 'Se actualizo el usuario correctamente')
-      )
-    );
+    return this.httpClient.put<User>(environment.apiUrl+'/users/'+newUser.id,newUser).pipe(
+      mergeMap(() => this.getUsers()),
+      tap(() => this.alerts.showSuccess('Realizado', 'Se actualizo el usuario correctamente'))
+    )
   }
 }

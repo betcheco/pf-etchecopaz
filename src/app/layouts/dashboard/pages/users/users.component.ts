@@ -12,7 +12,6 @@ export class UsersComponent implements OnInit{
 
  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
  formVisible = false;
-//  users:User[] = MOCK_USERS;
  users:User[] = [];
  dataSource = this.users
  lastId = this.users.length;
@@ -46,8 +45,16 @@ getUsers(){
 
  addUser(newUser: User) {
   if ( newUser.id === 0 ){
-    this.lastId++;
-    this.usersService.addUser({...newUser, id: this.lastId}).subscribe({
+    // this.lastId++;
+    const mapNewUser = {
+      firstName:newUser.firstName,
+      lastName:newUser.lastName,
+      email:newUser.email,
+      password:newUser.password,
+      role:newUser.role
+    }
+   
+    this.usersService.addUser(mapNewUser).subscribe({
       next: (newUsers) => {
         this.users = [...newUsers]
       },

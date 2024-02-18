@@ -20,7 +20,7 @@ export class AuthService {
       role: Role.ADMIN
     };
 
-    this.router.navigate(['dashboard'])
+    this.router.navigate(['dashboard', 'home'])
   }
 
   logout():void {
