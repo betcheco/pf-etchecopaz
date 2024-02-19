@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { CoursesComponent } from './courses.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconButton } from '@angular/material/button';
+import {  MatButtonModule, MatIconButton } from '@angular/material/button';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
+import { ClassroomOptionPipe } from './components/course-details/pipes/classroom-option.pipe';
+
 
 
 
@@ -17,7 +19,8 @@ import { MatInput } from '@angular/material/input';
 @NgModule({
   declarations: [
     CoursesComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    ClassroomOptionPipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { MatInput } from '@angular/material/input';
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInput
+    MatInput,
+    MatButtonModule
 
   ],
 

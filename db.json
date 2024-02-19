@@ -33,5 +33,58 @@
       "role": "TEACHER"
     }
   ],
-  "courses": []
+  "courses": [
+    {
+      "id": "1",
+      "name": "Prueba",
+      "classes": [
+        {
+          "id": "1",
+          "teacher": {
+            "id": "5",
+            "firstName": "Maito",
+            "lastName": "Guy",
+            "email": "magu@gmail.com",
+            "password": "",
+            "role": "TEACHER"
+          }
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "teacher": {
+        "id": "5",
+        "firstName": "Maito",
+        "lastName": "Guy",
+        "email": "magu@gmail.com",
+        "password": "",
+        "role": "TEACHER"
+      },
+      "students": []
+    },
+    {
+      "id": "2",
+      "teacher": {
+        "id": "4",
+        "firstName": "Kakashi",
+        "lastName": "Hatake",
+        "email": "kaha@gmail.com",
+        "password": "",
+        "role": "TEACHER"
+      },
+      "students": [
+        {
+          "firstName": "Naruto",
+          "lastName": "Uzumaki",
+          "email": "narutito@gmail.com",
+          "role": "ADMIN",
+          "id": "1",
+          "password": ""
+        }
+      ]
+    }
+  ]
 }

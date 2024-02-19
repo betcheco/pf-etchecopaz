@@ -19,6 +19,7 @@ import { ClassesModule } from './pages/classes/classes.module';
 import { CoursesModule } from './pages/courses/courses.module';
 import { CourseDetailsComponent } from './pages/courses/components/course-details/course-details.component';
 import { ClassDetailsComponent } from './pages/classes/components/class-details/class-details.component';
+import { adminGuard } from '../../core/guards/admin.guard';
 
 
 
@@ -44,10 +45,12 @@ import { ClassDetailsComponent } from './pages/classes/components/class-details/
       },
       {
         path:'users',
+        canActivate: [adminGuard],
         component:UsersComponent,
       },
       {
         path:'users/:id',
+        canActivate: [adminGuard],
         component:DetailsComponent
       },
       {

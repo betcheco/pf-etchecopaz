@@ -1,34 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Class } from '../../layouts/dashboard/pages/classes/models';
-import {  debounceTime, delay, of, tap } from 'rxjs';
+import { ClassRoom } from '../../layouts/dashboard/pages/classes/models';
+import {  catchError, debounceTime, delay, mergeMap, of, tap } from 'rxjs';
 import { AlertsService } from './alerts.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-let MOCK_CLASSES:Class[] = [
-  {
-    id:1,
-    teacher: 4,
-    students: []
-  },
-  {
-    id:2,
-    teacher: 5,
-    students: []
-  }
-]
+// let MOCK_CLASSES:Class[] = [
+//   {
+//     id:1,
+//     teacher: 4,
+//     students: []
+//   },
+//   {
+//     id:2,
+//     teacher: 5,
+//     students: []
+//   }
+// ]
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassesService {
-  constructor(private alerts: AlertsService) { }
+  constructor(private alerts: AlertsService, private httpClient: HttpClient) { }
 
   getClasses(){
-    return of(MOCK_CLASSES)
+    return this.httpClient.get<ClassRoom[]>(environment.apiUrl + '/classes').pipe(
+      catchError((error) => {
+        this.alerts.showError('Error');
+        return of([]);
+    })
+    )
   }
 
-  addClass(newClass:Class){
-    MOCK_CLASSES.push(newClass);
-    return this.getClasses().pipe(
+  addClass(newClass:ClassRoom){
+    const payload = {
+      teacher: newClass.teacher,
+      students: newClass.students
+    }
+    return this.httpClient.post<ClassRoom>(environment.apiUrl+'/classes', payload).pipe(
+      mergeMap(() => this.getClasses()),
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se agrego la clase correctamente')
       )
@@ -36,17 +47,17 @@ export class ClassesService {
   }
 
   deleteClass(id:number){
-    MOCK_CLASSES = MOCK_CLASSES.filter((c) => c.id != id)
-    return this.getClasses().pipe(
+    return this.httpClient.delete<ClassRoom>(environment.apiUrl + '/classes/' + id).pipe(
+      mergeMap(() => this.getClasses()),
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se elimino la clase correctamente')
       )
     );
   }
 
-  updateClass(newClass:Class){
-    MOCK_CLASSES = MOCK_CLASSES.map( (c) => c.id === newClass.id ? { ...c, ...newClass } : c )
-    return this.getClasses().pipe(
+  updateClass(newClass:ClassRoom){
+    return this.httpClient.put<ClassRoom>(environment.apiUrl + '/classes/'+newClass.id,newClass).pipe(
+      mergeMap(() => this.getClasses()),
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se actualizo la clase correctamente')
       )

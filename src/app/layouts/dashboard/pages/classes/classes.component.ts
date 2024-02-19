@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Class } from './models';
+import { ClassRoom } from './models';
 import { ClassesService } from '../../../../core/services/classes.service';
 
 
@@ -10,7 +10,7 @@ import { ClassesService } from '../../../../core/services/classes.service';
 })
 export class ClassesComponent implements OnInit {
 
-  classes: Class[] = []
+  classes: ClassRoom[] = []
   displayedColumns: string[] = ['id','teacher', "students", "actions"];
 
   constructor(private classService: ClassesService) {}
@@ -34,7 +34,7 @@ export class ClassesComponent implements OnInit {
     }})
   }
 
-  onEdit(pClass: Class) {
+  onEdit(pClass: ClassRoom) {
   this.classService.updateClass(pClass).subscribe({
     next:(newClasses) => {
       this.classes = newClasses

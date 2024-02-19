@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../../layouts/dashboard/pages/courses/models';
-import { delay, of, tap } from 'rxjs';
+import { catchError, delay, mergeMap, of, tap } from 'rxjs';
 import { AlertsService } from './alerts.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 let MOCK_COURSES: Course[] = [
   {
@@ -21,24 +23,47 @@ let MOCK_COURSES: Course[] = [
   }
 ]
 
+const fallbackCourse: Course = {
+  id:0,
+  name:'',
+  classes:[]
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  constructor(private alerts: AlertsService) { }
+  constructor(private alerts: AlertsService, private httpClient: HttpClient) { }
 
   getCourses(){
-    return of(MOCK_COURSES).pipe(delay(1000))
+    // return of(MOCK_COURSES).pipe(delay(1000))
+    return this.httpClient.get<Course[]>(environment.apiUrl + '/courses').pipe(
+      catchError((error) => {
+          this.alerts.showError('Error');
+          return of([]);
+      })
+    )
   }
 
   getCourseById(id: number) {
-    return of(MOCK_COURSES.filter((c) => c.id == id)).pipe(delay(1000));
+    // return of(MOCK_COURSES.filter((c) => c.id == id)).pipe(delay(1000));
+    return this.httpClient.get<Course>(environment.apiUrl+'/courses/'+id).pipe(
+      catchError((error) => {
+          this.alerts.showError('Error');
+          return of(fallbackCourse)
+      })
+    )
   }
 
   addCourse(newCourse:Course){
-    MOCK_COURSES.push(newCourse);
-    return this.getCourses().pipe(
+    const payload = {
+      name: newCourse.name,
+      classes:newCourse.classes 
+    }
+    return this.httpClient.post<Course>(environment.apiUrl + '/courses', payload).pipe(
+      mergeMap(() => this.getCourses()),
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se agrego el curso correctamente')
       )
@@ -46,8 +71,8 @@ export class CoursesService {
   }
 
   deleteCourse(id:number){
-    MOCK_COURSES = MOCK_COURSES.filter((c) => c.id != id)
-    return this.getCourses().pipe(
+    return this.httpClient.delete<Course>(environment.apiUrl+ '/courses/' +id).pipe(
+      mergeMap(() => this.getCourses()),
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se elimino el curso correctamente')
       )
@@ -55,8 +80,7 @@ export class CoursesService {
   }
 
   updateCourse(newCourse:Course){
-    MOCK_COURSES = MOCK_COURSES.map( (c) => c.id === newCourse.id ? { ...c, ...newCourse } : c )
-    return this.getCourses().pipe(
+    return this.httpClient.put<Course>(environment.apiUrl + '/courses/' + newCourse.id, newCourse).pipe(
       tap(() =>
         this.alerts.showSuccess('Realizado', 'Se actualizo el curso correctamente')
       )

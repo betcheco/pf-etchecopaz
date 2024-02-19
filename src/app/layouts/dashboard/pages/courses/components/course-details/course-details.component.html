@@ -1,28 +1,17 @@
 <app-page-header title="Detalle del curso" buttonText="" linkPath=""></app-page-header>
 
 <section>
-    <form>
-        Nombre del curso:
-        {{ course.name }}
-    </form>
-    Clases:
-    <ul>
-        <li *ngFor="let class of classes">
-            {{ class.id }}
-        </li>
-    </ul>
-<p>course-details works!</p>
-{{ courseId }}
-
     <form 
+    class="form"
     (ngSubmit)="onSubmit()"
     [formGroup]="courseFormGroup"
     >
     <div class="name-container"> 
-      <mat-form-field>
+      <mat-form-field
+      class="w-full">
         <mat-label>Nombre del curso</mat-label>
         <input
-        formControlName="courseName"  
+        formControlName="name"
         matInput 
         placeholder="Ex. React"
         >
@@ -32,14 +21,17 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field>
+    <mat-form-field
+    class="w-full">
       <mat-label>Clases</mat-label>
-      <mat-select formControlName="courseClasses" multiple>
-        @for (class of course.classes; track class) {
-          <mat-option [value]="class">{{class.id}}</mat-option>
+      <mat-select formControlName="classes" multiple [compareWith]="compareClasses">
+        @for (class of classes; track class) {
+          <mat-option 
+          [value]="class">{{class | classroomOption}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
+    
     
     <div class="actions-container">
       <button
@@ -51,8 +43,15 @@
       (click)="onCancel()"
       mat-raised-button
       >Cancelar</button>
+
+      <button
+      (click)="refrescar()"
+      mat-raised-button
+      >refrescar</button>
     </div>
     
   </form>
+
+  
   </section>
   

@@ -13,12 +13,18 @@
         <input matInput 
         formControlName="email"  
         type="email" />
+        @if (loginFormGroup.get("email")?.invalid) {
+          <mat-error class="mb-4">{{getErrorMessage('email')}}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput 
         formControlName="password"  
         type="password" />
+        @if (loginFormGroup.get("password")?.invalid) {
+          <mat-error class="mb-4">{{getErrorMessage('password')}}</mat-error>
+        }
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">

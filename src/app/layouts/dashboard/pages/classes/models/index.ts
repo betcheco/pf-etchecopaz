@@ -1,7 +1,7 @@
 import { User } from "../../users/models";
 
-export interface Class {
+export interface ClassRoom {
     id:number,
-    teacher: number,
+    teacher: User,
     students: User[]
 }

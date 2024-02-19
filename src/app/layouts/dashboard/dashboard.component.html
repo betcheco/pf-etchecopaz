@@ -18,6 +18,7 @@
         Home
       </a>
       <a
+      *ngIf="isAdmin()"
         #usersLink="routerLinkActive"
         routerLinkActive 
         [activated]="usersLink.isActive"
@@ -39,6 +40,14 @@
         routerLink="classes" 
         mat-list-item>
         Clases
+      </a>
+      <a
+        #logoutLink="routerLinkActive" 
+        routerLinkActive
+        [activated]="logoutLink.isActive" 
+        (click)="logoutUser()"
+        mat-list-item>
+        Cerrar sesion
       </a>
      </mat-nav-list>
     </mat-drawer>

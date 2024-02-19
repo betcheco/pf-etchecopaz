@@ -34,4 +34,21 @@ export class LoginComponent {
       this.authService.login()
     }
   }
+
+  getErrorMessage(formControlName:string):string {
+    const form = this.loginFormGroup.get(formControlName);
+    if (form){
+      if (form.hasError('required')) {
+        return 'Debes ingresar un valor';
+      }
+      if (form.hasError('email')) {
+        return 'El email no es valido'
+      }
+      if (form.hasError('minlength')) {
+        return 'Debes ingresar al menos 6 caracteres'
+      }
+    } 
+      return ''
+    
+  }
 }
