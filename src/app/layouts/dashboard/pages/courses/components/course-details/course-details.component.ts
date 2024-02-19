@@ -27,12 +27,26 @@ refrescar() {
 }
 courseFormGroup: FormGroup;
 onSubmit() {
-  console.log(this.courseFormGroup.value)
+  console.log("submit")
+  if (this.courseId == '0' || null) {
+    this.courseService.addCourse(this.courseFormGroup.value).subscribe({
+      next: (value) => {
+        this.router.navigate(['dashboard', 'courses'])
+      }
+    });
+  } else {
+    console.log(this.courseFormGroup.value);
+    this.courseService.updateCourse({...this.courseFormGroup.value, id:this.courseId}).subscribe({
+      next: (value) => {
+        this.router.navigate(['dashboard', 'courses'])
+      },
+    })
+  }
 }
 onCancel() {
   this.router.navigate(['dashboard','courses'])
 }
-  courseId : string | null = '0';
+  courseId : string = '0';
   course: Course = { id: 0, classes: [], name: '' };
   classes : ClassRoom[] = [];
 
@@ -51,11 +65,12 @@ onCancel() {
 
 
   ngOnInit(): void {
-    this.courseId = this.route.snapshot.paramMap.get('id');
+    this.courseId = this.route.snapshot.paramMap.get('id')!;
+    console.log('id del curso', this.courseId);
     if (this.courseId == '0' || null) {
       
     } else {
-      this.courseService.getCourseById(Number(this.courseId)).subscribe({
+      this.courseService.getCourseById(this.courseId).subscribe({
         next:(value) => {
           console.log(this.course)
           console.log(value)

@@ -4,6 +4,7 @@ import { catchError, delay, mergeMap, of, tap } from 'rxjs';
 import { AlertsService } from './alerts.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { JsonPipe } from '@angular/common';
 
 let MOCK_COURSES: Course[] = [
   {
@@ -47,11 +48,11 @@ export class CoursesService {
     )
   }
 
-  getCourseById(id: number) {
+  getCourseById(id: string) {
     // return of(MOCK_COURSES.filter((c) => c.id == id)).pipe(delay(1000));
     return this.httpClient.get<Course>(environment.apiUrl+'/courses/'+id).pipe(
       catchError((error) => {
-          this.alerts.showError('Error');
+          this.alerts.showError('Error cargando Curso');
           return of(fallbackCourse)
       })
     )
