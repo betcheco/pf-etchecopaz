@@ -6,16 +6,6 @@
 
 <section>
   <form (ngSubmit)="onSubmit()" [formGroup]="classRoomFormGroup">
-    <!-- <div class="name-container">
-      <mat-form-field class="w-full">
-        <mat-label>Nombre de</mat-label>
-        <input formControlName="name" matInput placeholder="Ex. React" />
-        @if (classRoomFormGroup.get("courseName")?.invalid) {
-        <mat-error class="mb-4">Error </mat-error>
-        }
-      </mat-form-field>
-    </div> -->
-
     <mat-form-field class="w-full">
       <mat-label>Profesor</mat-label>
       <mat-select

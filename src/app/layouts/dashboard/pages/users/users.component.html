@@ -12,6 +12,8 @@
 (onCancel)="handleOnCancel($event)"
 [user]="this.user" 
 [showForm]="this.formVisible"></app-user-form>
+
+<app-registrations></app-registrations>
 <hr>
 
     <table *ngIf="users.length > 0; else elseBlock"

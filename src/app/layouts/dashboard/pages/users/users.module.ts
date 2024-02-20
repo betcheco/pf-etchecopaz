@@ -17,6 +17,7 @@ import { UsersService } from '../../../../core/services/users.service';
 import { UsersMockService } from '../../../../core/services/users-mock.service';
 import { MatSelectModule } from '@angular/material/select';
 import { DetailsComponent } from './components/details/details.component';
+import { RegistrationsComponent } from './components/registrations/registrations.component';
 
 
 
@@ -26,7 +27,8 @@ import { DetailsComponent } from './components/details/details.component';
         UsersComponent,
         TableComponent,
         UserFormComponent,
-        DetailsComponent
+        DetailsComponent,
+        RegistrationsComponent
     ],
     exports: [UsersComponent,
         TableComponent,
