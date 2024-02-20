@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassRoom } from './models';
 import { ClassesService } from '../../../../core/services/classes.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class ClassesComponent implements OnInit {
   classes: ClassRoom[] = []
   displayedColumns: string[] = ['id','teacher', "students", "actions"];
 
-  constructor(private classService: ClassesService) {}
+  constructor(private classService: ClassesService, private router:Router) {}
 
   ngOnInit(): void {
     this.getClasses()
@@ -35,10 +36,7 @@ export class ClassesComponent implements OnInit {
   }
 
   onEdit(pClass: ClassRoom) {
-  this.classService.updateClass(pClass).subscribe({
-    next:(newClasses) => {
-      this.classes = newClasses
-    }})
+    this.router.navigate(['dashboard','classes',pClass.id])
   }
   
 

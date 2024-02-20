@@ -8,6 +8,10 @@ import { ClassDetailsComponent } from './components/class-details/class-details.
 import { SharedModule } from '../../../../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
 
 
 
@@ -26,7 +30,10 @@ import { MatInput } from '@angular/material/input';
     MatIcon,
     SharedModule,
     MatFormFieldModule,
-    MatInput
+    MatInput,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class ClassesModule { }

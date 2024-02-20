@@ -23,16 +23,24 @@ import { environment } from '../../../environments/environment';
 })
 export class ClassesService {
   constructor(private alerts: AlertsService, private httpClient: HttpClient) { }
-
+  
   getClasses(){
     return this.httpClient.get<ClassRoom[]>(environment.apiUrl + '/classes').pipe(
       catchError((error) => {
         this.alerts.showError('Error');
         return of([]);
-    })
-    )
-  }
-
+      })
+      )
+    }
+    getClassById(classRoomId: string) {
+     return this.httpClient.get<ClassRoom>(environment.apiUrl + '/classes/'+classRoomId).pipe(
+      catchError((error) => {
+        this.alerts.showError("Error cargando clase");
+        return of()
+      })
+     ) 
+    }
+    
   addClass(newClass:ClassRoom){
     const payload = {
       teacher: newClass.teacher,
@@ -56,6 +64,7 @@ export class ClassesService {
   }
 
   updateClass(newClass:ClassRoom){
+    console.log(newClass)
     return this.httpClient.put<ClassRoom>(environment.apiUrl + '/classes/'+newClass.id,newClass).pipe(
       mergeMap(() => this.getClasses()),
       tap(() =>

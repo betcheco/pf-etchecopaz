@@ -75,16 +75,7 @@
         "password": "",
         "role": "TEACHER"
       },
-      "students": [
-        {
-          "firstName": "Naruto",
-          "lastName": "Uzumaki",
-          "email": "narutito@gmail.com",
-          "role": "ADMIN",
-          "id": "1",
-          "password": ""
-        }
-      ]
+      "students": []
     }
   ]
 }

@@ -1,34 +1,34 @@
-<app-page-header title="Clases" buttonText="Crear clase" linkPath="dashboard/classes/0">
-  
+<app-page-header title="Clases" buttonText="Crear clase" linkPath="dashboard/classes/0"></app-page-header>
+  <!-- <p>clases</p>
+  <p *ngIf="classes.length > 0;">HAY CLASES</p> -->
+ <section>
 <table 
 *ngIf="classes.length > 0; else elseBlock"
 mat-table [dataSource]="classes" class="mat-elevation-z8">
 
-<!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition" -->
 
-<!-- Position Column -->
+
 <ng-container matColumnDef="id">
   <th mat-header-cell *matHeaderCellDef> Id </th>
   <td mat-cell *matCellDef="let element"> {{element.id}} </td>
 </ng-container>
 
-<!-- Name Column -->
+
 <ng-container matColumnDef="teacher">
   <th mat-header-cell *matHeaderCellDef> Profesor </th>
-  <td mat-cell *matCellDef="let element"> {{element.teacher.firstName}} </td>
+  <td mat-cell *matCellDef="let element"> {{element.teacher | fullName}} </td>
 </ng-container>
 
-  <!-- Name Column -->
+
   <ng-container matColumnDef="students">
     <th mat-header-cell *matHeaderCellDef> Cant. de Alumnos </th>
     <td mat-cell *matCellDef="let element"> {{element.students.length}} </td>
   </ng-container>
 
 
-  <!-- Actions Column -->
+
 <ng-container matColumnDef="actions">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header appFont20>  </th>
+  <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
   <td mat-cell *matCellDef="let element">
     <button (click)="onEdit(element)"
     mat-icon-button matTooltip="Editar" aria-label="Icon button with a edit icon">
@@ -48,3 +48,4 @@ mat-table [dataSource]="classes" class="mat-elevation-z8">
 <ng-template #elseBlock>
 No se encontraron clases
 </ng-template>
+</section>
